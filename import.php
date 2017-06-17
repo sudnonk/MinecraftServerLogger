@@ -27,8 +27,11 @@ $exits = array_flip($exits);
  * @var  $line string
  */
 foreach ($lines as $key=>$line) {
+    //$lineがから文字列ならスキップ
+    if(strlen($line) < 1) continue;
+
     /* @var $match array */
-    preg_match("/^(\[[0-9]{2}:[0-9]{2}:[0-9]{2}\]) (\[.+\]): (.+)$/", $line, $match);
+    preg_match("/^\[([0-9]{2}:[0-9]{2}:[0-9]{2})\] \[(.+)\]: (.+)$/", $line, $match);
 
     /**
      * 例：[03:38:00] [Server thread/WARN]: Fetching addPacket for removed entity
@@ -39,6 +42,8 @@ foreach ($lines as $key=>$line) {
     $time = $match[1];
     $status = $match[2];
     $message = $match[3];
+    if(!preg_match("/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/",$time)) continue;
+    if(strlen($status) < 1) continue;
 
     /* @var $id string 日付+ログされた時間+行番号は恐らく一意 */
     $id = $date.$time.$key;

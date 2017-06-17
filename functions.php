@@ -54,7 +54,7 @@ class Util{
      * エラーが起きたらexit
      */
     function parse_log_file($log){
-        $lines = preg_split("\n",$log);
+        $lines = explode("\n",$log);
         if($lines !== false) return $lines;
         exit("Failed to parse log file. Check error_log.");
     }
