@@ -19,7 +19,7 @@ class Util{
         $ini = parse_ini_file(INI_PATH,true);
         if($ini === false) exit("Failed to open config file. Check your config file exists.");
         $this->db_ini = $ini["MySQL"];
-        $this->mc_ini = $ini["Minecrafat"];
+        $this->mc_ini = $ini["Minecraft"];
     }
 
     /**
